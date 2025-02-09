@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textbox</title>
+    <!-- Tailwind css cdn link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-green-200 font-sans p-8">
+
+    <div class="max-w-xl mx-auto bg-green-500 p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-bold mb-4 justify-center text-center underline">Textbox</h2>
+        <h2 class="text-xl font-semibold mb-4 ">Type your message....</h2>
+
+        <textarea id="message" maxlength="200" placeholder="Type here..." class="w-full h-32 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+
+        <div class="mt-2">
+            <span id="charCount" class="text-gray-700 text-sm">0</span>/200 characters
+        </div>
+        <div id="warningMessage" class="text-red-500 text-sm mt-2 hidden">
+            You have exceeded the character limit!
+        </div>
+    </div>
+
+    <script>
+        const textArea = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+        const warningMessage = document.getElementById('warningMessage');
+        
+        textArea.addEventListener('input', function() {
+            const typedChars = textArea.value.length;
+            const maxChars = 200;
+            charCount.textContent = typedChars;
+
+            if (typedChars == maxChars) {
+                warningMessage.classList.remove('hidden');  // Show warning message
+                textArea.value = textArea.value.slice(0, maxChars); // Truncate text to maxChars
+                charCount.textContent = maxChars; // Update character count to maxChars
+            } else {
+                warningMessage.classList.add('hidden');  // Hide warning message
+            }
+        });
+    </script>
+</body>
+</html>
